@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="container-content">
+        <mat-card class="char-counter">
+            <h1>Character Counter</h1>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Enter Text</mat-label>
+                <textarea matInput [(ngModel)]="counterText" (keyup)="readText()"></textarea>
+            </mat-form-field>
+            <div class="counter">
+                <span><strong>Characters: </strong>{{totalCharacters}}</span>
+                <span><strong>Words: </strong>{{totalWords}}</span>
+            </div>
+        </mat-card>
+    </div>
+</div>

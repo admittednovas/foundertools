@@ -1,0 +1,1 @@
+export const ReviewsHelpful = {"id":{"type":"integer","required":true},"customerid":{"type":"integer"},"reviewid":{"type":"integer"},"lastmodified":{"type":"date-time"}}

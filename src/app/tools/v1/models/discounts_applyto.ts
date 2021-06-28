@@ -1,0 +1,1 @@
+export const Discounts_ApplyTo = {"syncid":{"type":"integer","required":true},"discountautoid":{"type":"integer"},"categoryid":{"type":"integer"},"productcode":{"type":"text","maxLength":30,"pattern":"^(--|00)|(--)","patternmessage":"can not being with double zeros (00) or include double dashes (--) or special characters.","required":true}}

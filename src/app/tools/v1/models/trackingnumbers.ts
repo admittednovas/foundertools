@@ -1,0 +1,1 @@
+export const TrackingNumbers = {"trackingnumber":{"type":"text","maxLength":50,"required":true},"gateway":{"type":"text","maxLength":15},"shipdate":{"type":"date-time"},"orderid":{"type":"integer"},"shipment_cost":{"type":"number"},"shippingmethodid":{"type":"number"},"package":{"type":"text","maxLength":35},"form":{"type":"text","maxLength":100}}

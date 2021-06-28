@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /services/
+
+Sitemap: http://www.foundertools.app/sitemap.xml

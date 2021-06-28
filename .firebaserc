@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "foundertools-fb459": {
+      "hosting": {
+        "foundertools": [
+          "foundertools-fb459"
+        ]
+      }
+    }
+  }
+}

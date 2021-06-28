@@ -1,0 +1,49 @@
+@use '../../../../toolstyle.scss';
+
+.results-settings {
+    display:flex;
+    flex-wrap:wrap;
+    @media screen and (min-width:992px){
+        flex-wrap:nowrap;
+    }
+    #output-field {
+        flex:1 0 100%;
+        margin:1rem 0;
+        @media screen and (min-width:992px){
+            flex: 1 0 50%;
+            margin:0;
+            padding-right:1rem;
+        }
+        .output-radio-group {
+            display:flex;
+            flex-direction:column;
+            margin: 1rem 0;
+            .mat-radio-button {
+                margin:0.25rem 0;
+            }
+        }
+    }
+    #preview {
+        flex:1 0 100%;
+        overflow-x:hidden;
+        @media screen and (min-width:992px){
+            flex:1 1 50%;
+        }
+        code {
+            border-radius:2px;
+            background:#f8f8f8;
+            height:100%;
+            border:1px solid #eeee;
+            padding:1rem;
+            display: block;
+            white-space: pre;
+            color:#424242;
+            line-height:1.2rem;
+            font-family: monospace;
+            overflow-x:scroll;
+        }
+    }
+}
+.download-wrapper {
+    margin-top:2rem;
+}

@@ -1,0 +1,55 @@
+{
+  "hosting": [
+    {
+      "target": "foundertools",
+      "public": "dist\\foundertools\\dist\\foundertools\\browser",
+      "ignore": [
+        "**/.*"
+      ],
+      "headers": [
+        {
+          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public,max-age=31536000,immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+          "headers": [ {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          } ]      
+        }
+      ],
+      "redirects": [
+        {
+          "source": "/v1/csv-file-splitter",
+          "destination": "/utility/csv-splitter",
+          "type": 301
+        },
+        {
+          "source": "/v2/csv-file-splitter",
+          "destination": "/utility/csv-splitter",
+          "type": 301
+        },
+        {
+          "source": "/v1/dropship-mapper",
+          "destination": "/v1/field-mapper",
+          "type": 301
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "ssr"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "source": "dist/foundertools"
+  }
+}

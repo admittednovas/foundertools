@@ -1,0 +1,110 @@
+<mat-drawer-container class="tool-container" [hasBackdrop]="isOpen">
+  <mat-drawer mode="side" [opened]='!isOpen' class="mat-elevation-z1">
+    <h1>Import Tester</h1>
+    <form [formGroup]="headerForm" (ngSubmit)="startTool()" class="tool-controls">
+
+        <mat-form-field appearance="fill" color="primary">
+            <mat-label>Destination Table</mat-label>
+            <mat-select formControlName="destinationTable">
+                <mat-option *ngFor="let table of allTables" [value]="table">{{table}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="file-upload">
+            <input type="file" accept=".csv" formControlName="csvfile" name="csvfile" id="fileinput" #csv (change)="fileUpload(csv.files)">
+            <button type="button" mat-raised-button color="primary" (click)="csv.click()" class="is-fullwidth">
+                <fa-icon [icon]="faFileUpload" size="lg"></fa-icon>
+                <span>Upload CSV File</span>
+            </button>
+        </div>
+        <div class="start-tool">
+            <button mat-raised-button color="accent" (click)="startTool()" class="is-fullwidth" [disabled]="!headerForm.valid">
+                <fa-icon [icon]="faPlay" size="lg"></fa-icon>
+                <span>Test CSV File</span>
+            </button>
+        </div>
+    </form>
+    <p class="notes"><strong>Note:</strong> The tester can not locate empty columns or rows. If the test passes but the CSV fails to import, try highlighting empty columns and rows and deleting in your spreadsheet software.</p>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button mat-fab color="primary" class="sidebar-toggle" (click)="openSidebar()">
+        <fa-icon [icon]=" (isOpen? faSlidersH : faTimes) " size="lg"></fa-icon>
+    </button>
+
+
+    <mat-card>
+        <mat-card-content>
+            <div class="instruction" *ngIf="!ready; else toolResults">
+                <p>On occasion when attempting to import a large CSV to the Volusion platform it will cause a time out during import. This tools was designed to resolve that issue by splitting your large file into multiple easy to import files.</p>
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>Select the maximum number of rows per file using the select field above.</li>
+                    <li>Upload your CSV import file using the <i>Upload CSV</i> button above.</li>
+                    <li>Click the <i>Start Splitting</i> button to start the tool.</li>
+                </ol>
+                <p>The tool will then process your file and provide you with a download button to download a zip file containing your split files.</p>
+            </div>
+            <ng-template #toolResults>
+                
+                <div class="progress-wrapper" *ngIf="!complete">
+                    <mat-spinner></mat-spinner>
+                </div>
+
+                <div class="results" *ngIf="complete">
+
+                    <div class="error-wrapper"  *ngIf="columnErrors.length > 0">
+
+                        <div class="copy-errors">
+                            <button mat-raised-button color="accent" (click)="copyErrors()">
+                                <fa-icon [icon]="faCopy" size="lg"></fa-icon>
+                                <span>Copy Results</span>
+                            </button>
+                        </div>
+
+                        <h2>Column Errors</h2>
+                        <table mat-table [dataSource]="columnErrors" class="error-table mat-elevation-z1">
+                            <ng-container matColumnDef="column">
+                                <th mat-header-cell *matHeaderCellDef> Column Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.column}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="message">
+                                <th mat-header-cell *matHeaderCellDef> Issue</th>
+                                <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+                            </ng-container>
+        
+                            <tr mat-header-row *matHeaderRowDef="displayColumnErrors"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayColumnErrors;"></tr>
+                        </table>
+                    </div>
+
+                    <div class="error-wrapper"  *ngIf="rowErrors.length > 0">
+                        <h2>Row Errors</h2>
+                        <table mat-table [dataSource]="rowErrors" class="error-table mat-elevation-z1">
+                            <ng-container matColumnDef="row">
+                                <th mat-header-cell *matHeaderCellDef> Row </th>
+                                <td mat-cell *matCellDef="let element"> {{element.row}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="column">
+                                <th mat-header-cell *matHeaderCellDef> Field </th>
+                                <td mat-cell *matCellDef="let element"> {{element.column}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="message">
+                                <th mat-header-cell *matHeaderCellDef> Issue </th>
+                                <td mat-cell *matCellDef="let element"> {{element.message}} <span *ngIf="element.char"><span class="show-char" *ngFor="let char of element.char" [innerHTML]="char"></span></span></td>
+                            </ng-container>
+        
+                            <tr mat-header-row *matHeaderRowDef="displayRowErrors"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayRowErrors;"></tr>
+                        </table>
+                    </div>
+
+                </div>
+
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="ad-wrapper"></div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

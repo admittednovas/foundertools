@@ -1,0 +1,19 @@
+#release-wrapper {
+    margin-top:2rem;
+    margin-bottom:2rem;
+    h1 {
+        font-weight:800;
+        font-size:2rem;
+        @media screen and (min-width:991px){
+            font-size:4rem;
+            line-height:4.2rem;
+        }
+    }
+}
+.mat-expansion-panel-header-title {
+    align-items:center;
+    span {
+        margin-left:0.75rem;
+        font-size:1.4rem;
+    }
+}

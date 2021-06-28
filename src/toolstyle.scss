@@ -1,0 +1,108 @@
+.tool-container {
+    height:100%;
+    z-index:2;
+    .mat-drawer.mat-drawer-side {
+        width:65vw;
+        padding:3rem 1rem 2rem;
+        @media screen and (min-width:992px) {
+            width:15vw;
+            min-width:300px;
+        }
+        h1 {
+            margin-bottom:2rem;
+        }
+        .tool-controls {
+            display:flex;
+            flex-direction:column;
+            flex-wrap:nowrap;
+            .file-upload {
+                margin-top:1rem;
+                input[type="file"] {
+                    display:none;
+                }
+            }
+            .is-fullwidth {
+                width:100%;
+                .ng-fa-icon {
+                    margin-right:0.5rem;
+                }
+            }
+            .start-tool {
+                margin-top:2rem;
+            }
+        }
+        .notes {
+            margin-top:4rem;
+            strong {
+                color:#C2185B;
+            }
+        }
+    }
+    .mat-drawer-content {
+        background:#ECEFF1;
+        padding:1rem;
+        overflow:unset;
+        @media screen and (min-width:992px){
+            padding:2rem;
+        }
+        .sidebar-toggle {
+            margin-bottom:2rem;
+            @media screen and (min-width:992px){
+                display:none;
+            }
+        }
+        .mat-card {
+            width:100%;
+            @media screen and (min-width:992px){
+                width:80%;
+            }
+            .instruction {
+                font-size:1.2rem;
+            }
+            .progress-wrapper {
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:2rem 0;
+            }
+        }
+    }
+}
+.ad-wrapper {
+    display:none;
+    @media screen and (min-width:1023px) {
+        width:20%;
+        padding:1rem 2rem;
+        height:500px;
+        position:absolute;
+        top:0;
+        right:0;
+        display:block;
+    }
+}
+.mat-progress-spinner-indeterminate-animation {
+    /* keep anim slow to avoid wobble from rounding errors */
+    animation-duration: 9s !important;
+  }
+  
+  .mat-progress-spinner-indeterminate-animation circle {
+    animation-name: progress-spinner-stroke-rotate !important;
+    animation-timing-function: linear !important;
+    animation-duration: 4s !important;
+  }
+  
+  @keyframes progress-spinner-stroke-rotate {
+    $start: 200%; /* approx 2/3 of circle circumference */
+    $end: 20%;
+    0%   { stroke-dashoffset: $start; }
+    50%  { stroke-dashoffset: $end; }
+    /* removing transform: rotate(720deg) causes wobble */
+    100% { stroke-dashoffset: $start; transform: rotate(720deg); }
+  }
+
+  button.fullwidth {
+      width:100%;
+      .ng-fa-icon {
+          margin-right:0.5rem;
+      }
+  }

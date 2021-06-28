@@ -1,0 +1,53 @@
+#page-wrapper {
+    margin-top:2rem;
+    margin-bottom:2rem;
+    #content-wrapper {
+        display:flex;
+        flex-wrap:wrap;
+        margin:1rem 0;
+        @media screen and (min-width:992px){
+            flex-wrap:nowrap;
+            margin:0;
+        }
+        #about {
+            flex: 0 0 100%;
+            padding:0 0 1rem 0;
+            @media screen and (min-width:992px){
+                flex: 0 0 50%;
+                padding:0 1rem 0 0;
+            }
+            h1 {
+                font-weight:800;
+                font-size:2rem;
+                @media screen and (min-width:991px){
+                    font-size:4rem;
+                    line-height:4.2rem;
+                }
+            }
+            p {
+                margin:1rem 0;
+                font-size:1rem;
+                line-height:1.2rem;
+                @media screen and (min-width:991px){
+                    font-size:1.2rem;
+                    line-height:1.2rem;
+                }
+            }
+        }
+        #contact {
+            flex: 0 0 100%;
+            padding:1rem 0 0 0;
+            @media screen and (min-width:992px){
+                flex: 0 0 50%;
+                padding:0 0 0 1rem;
+            }
+            form {
+                display:flex;
+                flex-direction:column;
+                .mat-raised-button {
+                    margin-top:1rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1 @@
+export const Kits = {"kit_id":{"type":"integer","required":true},"kit_type":{"type":"text","maxLength":3},"kit_productcode":{"type":"text","maxLength":30},"kit_isproductcode":{"type":"text","maxLength":30},"kit_qty":{"type":"integer"},"lastmodby":{"type":"integer"},"kit_orderby":{"type":"integer"}}

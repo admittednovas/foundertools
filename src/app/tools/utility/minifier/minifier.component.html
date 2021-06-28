@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="container-content">
+        <mat-card class="minify-counter">
+            <h1>Minify Content</h1>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Enter HTML / CSS</mat-label>
+                <textarea matInput [formControl]="contentField"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="readContent()" class="full-width" [disabled]="contentField.value.length == 0">
+                <fa-icon [icon]="faCompressArrowsAlt" size="lg"></fa-icon>
+                <span>Minify</span>
+            </button>
+            <div class="results" *ngIf="ready">
+                <code>
+                    {{results}}
+                </code>
+                <button mat-raised-button color="accent" (click)="copyResults()" class="full-width copy">
+                    <fa-icon [icon]="faCopy"></fa-icon>
+                    <span>Copy</span>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+</div>

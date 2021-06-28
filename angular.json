@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/foundertools",
+            "outputPath": "dist/foundertools/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,12 +28,18 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest",
+              "src/sitemap.xml",
+              "src/robots.txt"
             ],
             "styles": [
+              "src/toolstyle.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -91,9 +97,13 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest",
+              "src/sitemap.xml",
+              "src/robots.txt"
             ],
             "styles": [
+              "src/toolstyle.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -105,7 +115,8 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "e2e/tsconfig.json",
+              "tsconfig.server.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -122,6 +133,75 @@
             "production": {
               "devServerTarget": "foundertools:serve:production"
             }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/foundertools/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "externalDependencies": [
+              "firebase",
+              "@firebase/app",
+              "@firebase/analytics",
+              "@firebase/auth",
+              "@firebase/component",
+              "@firebase/database",
+              "@firebase/firestore",
+              "@firebase/functions",
+              "@firebase/installations",
+              "@firebase/messaging",
+              "@firebase/storage",
+              "@firebase/performance",
+              "@firebase/remote-config",
+              "@firebase/util"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "foundertools:build",
+            "serverTarget": "foundertools:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "foundertools:build:production",
+              "serverTarget": "foundertools:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "foundertools:build:production",
+            "serverTarget": "foundertools:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "ssr": true
           }
         }
       }

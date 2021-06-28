@@ -1,0 +1,1 @@
+export const PageText = {"id":{"type":"integer"},"text":{"type":"text","maxLength":255}}

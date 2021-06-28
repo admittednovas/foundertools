@@ -1,0 +1,103 @@
+<mat-drawer-container class="tool-container" [hasBackdrop]="isOpen">
+    <mat-drawer mode="side" [opened]='!isOpen' class="mat-elevation-z1">
+        <h1>Structured Data Creator</h1>
+        <form [formGroup]="headerForm" (ngSubmit)="startTool()" class="tool-controls">
+
+            <mat-form-field appearance="fill" color="primary">
+                <mat-label>Destination Table</mat-label>
+                <mat-select formControlName="currencyCode" name="currencyCode">
+                    <mat-option *ngFor="let currency of currencies" [value]="currency">{{currency}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <div class="file-upload">
+                <input type="file" accept=".csv" formControlName="csvfile" name="csvfile" id="fileinput" #csv (change)="fileUpload(csv.files)">
+                <button type="button" mat-raised-button color="primary" (click)="csv.click()" class="is-fullwidth">
+                    <fa-icon [icon]="faFileUpload" size="lg"></fa-icon>
+                    <span>Upload CSV File</span>
+                </button>
+            </div>
+            <div class="start-tool">
+                <button mat-raised-button color="accent" (click)="startTool()" class="is-fullwidth" [disabled]="!headerForm.valid">
+                    <fa-icon [icon]="faPlay" size="lg"></fa-icon>
+                    <span>Build Schema</span>
+                </button>
+            </div>
+
+        </form>
+    </mat-drawer>
+    <mat-drawer-content>
+
+        <button mat-fab color="primary" class="sidebar-toggle" (click)="openSidebar()">
+            <fa-icon [icon]=" (isOpen? faSlidersH : faTimes) " size="lg"></fa-icon>
+        </button>
+
+        <mat-card>
+            <mat-card-content>
+            
+            
+                <div class="instruction" *ngIf="!ready; else toolResults">
+                    <p>This tool is intended to assist with the process of adding custom Structured Data to your stores product pages based on Google structured data for products <a href="https://developers.google.com/search/docs/data-types/product" target="_blank" alt="Google product structured data">documentation</a>.</p>
+                    <p>The tool relies on completed product information found in the <strong>Advanced Info > Vendors</strong> and <strong>Advanced Info > 3rd Party Integrations</strong> sections of your product edit page.</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>From your stores dashboard, go to <strong>Inventory > Import/Export > Standard Export</strong>.</li>
+                        <li>Select Products as the table to export, and select to Export all fields.</li>
+                        <li>In the tool controls above, set your stores default currency code</li>
+                        <li>Upload your product export CSV using the Upload CSV button.</li>
+                    </ol>
+                    <p>The tool will then process your file and provide you with an option to select which product description to add that Structured Data to, and will then provide an option to generate and download your import file. This file can then be uploaded to your store to add Structured Data to each product page.</p>
+                </div>
+                <ng-template #toolResults>
+                    <div class="progress-wrapper" *ngIf="!complete">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <div class="results" *ngIf="complete">
+
+                        <ng-container *ngIf="csvError.length > 0; else showResults">
+                            <div class="errors-wrapper">{{csvError}}</div>
+                        </ng-container>
+
+                        <ng-template #showResults>
+                            <div class="results-settings">
+                                <div id="output-field">
+                                    <h3>Select Output Field</h3>
+                                    <p>The structured data code will be added to a product description field, Google will read the structured data anywhere on the page so I would suggest selecting a field that is not being currently used on thes store.</p>
+                                    <form [formGroup]="outFieldForm">
+                                        <mat-radio-group class="output-radio-group" formControlName="outfield">
+                                            <mat-radio-button value="productdescription">Product Description</mat-radio-button>
+                                            <mat-radio-button value="productdescriptionshort">Product Description Short</mat-radio-button>
+                                            <mat-radio-button value="techspecs">Technical Specs</mat-radio-button>
+                                            <mat-radio-button value="extinfo">Extended Information</mat-radio-button>
+                                            <mat-radio-button value="productdescription_abovepricing">Product Description Above Pricing</mat-radio-button>
+                                        </mat-radio-group>
+                                        <div id="overwrite-wrapper">
+                                            <mat-checkbox formControlName="overwriteField">Replace exiting field data with Structured Data</mat-checkbox>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="preview">
+                                    <h3>Preview</h3>
+                                    <code>
+                                        {{ preview }}
+                                    </code>
+                                </div>
+                            </div>
+                            <div class="download-wrapper">
+                                <button mat-raised-button color="accent" class="fullwidth"  [disabled]="!outFieldForm.valid" (click)="downloadFile()">
+                                    <fa-icon [icon]="(generatingDL ? faSpinner : faFileDownload)" [class.fa-spin]="generatingDL"></fa-icon>
+                                    <span>Download Split Files</span>
+                                </button>
+                            </div>
+                        </ng-template>
+
+                    </div>
+                </ng-template>
+                
+                
+            </mat-card-content>
+            <div class="ad-wrapper"></div>
+        </mat-card>
+
+    </mat-drawer-content>
+</mat-drawer-container>

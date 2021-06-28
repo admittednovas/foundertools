@@ -1,0 +1,21 @@
+#annouce-wrapper {
+    margin-top:2rem;
+    margin-bottom:2rem;
+    h1 {
+        font-weight:800;
+        font-size:2rem;
+        @media screen and (min-width:991px){
+            font-size:4rem;
+            line-height:4.2rem;
+        }
+    }
+    p {
+        margin:1rem 0;
+        font-size:1rem;
+        line-height:1.2rem;
+        @media screen and (min-width:991px){
+            font-size:1.2rem;
+            line-height:1.2rem;
+        }
+    }
+}

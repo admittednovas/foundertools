@@ -1,0 +1,112 @@
+.hero {
+    background-color:#01579B;
+    color:#FFF;
+    position:relative;
+    &:after {
+        content:"";
+        background-image:url('/assets/dark-mosaic.png');
+        background-repeat:repeat;
+        position:absolute;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        opacity:0.5;
+    }
+    header {
+        padding:2rem 1rem;
+        text-align:center;
+        position:relative;
+        z-index:99;
+        @media screen and (min-width:991px){
+            padding:3rem 2rem;
+        }
+        h1 {
+            font-weight:800;
+            font-size:3rem;
+            line-height:3.2rem;
+            @media screen and (min-width:991px){
+                font-size:4rem;
+                line-height:4rem;
+            }
+        }
+        h2 {
+            @media screen and (min-width:991px){
+                font-size:1.8rem;
+                font-weight:400;
+                color:#E1F5FE;
+            }
+        }
+    }
+}
+.tool-filters {
+    justify-content:center;
+    background:#FFF;
+    .mat-button-toggle-group {
+        height:inherit;
+        line-height:56px;
+        border-radius:0px;
+        border:none;
+        @media screen and (min-width:1023px){
+            line-height:64px;
+        }   
+        .mat-button-toggle {
+            border:none;
+            color:#37474F;
+            @media screen and (min-width:1023px){
+                font-size:1.1rem;
+                padding:0 2rem;
+            }
+            .ng-fa-icon {
+                display:none;
+                @media screen and (min-width:1023px){
+                    display:inline-block;
+                    margin-right:0.75rem;
+                }
+            }
+        }
+    }
+}
+.tool-display {
+    margin:2rem 0;
+    .tool-grid {
+        display:flex;
+        flex-wrap:wrap;
+        .grid-item {
+            margin:0.25rem;
+            flex: 1 1 calc(100% - 0.5rem);
+            @media screen and (min-width:991px){
+                flex: 1 1 calc(50% - 0.5rem)
+            }
+            @media screen and (min-width:1200px){
+                flex: 1 1 calc(33.333% - 0.5rem)
+            }
+            .tool-card {
+                height:100%;
+                cursor:pointer;
+                transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+                &:hover {
+                    position:relative;
+                    z-index:9;
+                    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+                }
+                .tool-icon {
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    color:#039BE5;
+                }
+            }
+        }
+    }
+}
+.notools {
+    text-align:center;
+    h4 {
+        font-weight:600;
+        font-size:1.8rem;
+    }
+    p {
+        font-size:1.2rem;
+    }
+}

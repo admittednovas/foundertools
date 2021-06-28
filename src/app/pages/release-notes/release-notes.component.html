@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="container-content">
+        <div id="release-wrapper">
+            <mat-card>
+                <mat-card-content>
+                    <h1>Release Notes.</h1>
+                    <mat-accordion class="release-notes">
+
+                        <mat-expansion-panel [expanded]="true">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <fa-icon [icon]="faCalendarAlt" size="2x"></fa-icon>
+                                    <span>06-27-2021</span>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <ng-template matExpansionPanelContent>
+                                <ul>
+                                    <li>Design refresh using Angular Material.</li>
+                                    <li>Update to Import Tester for special characters check. Test now captures more special characters and displays the offending characters in the results</li>
+                                    <li>Update to Import Tester to provide error for MPN field as it can not be imported.</li>
+                                    <li>Update to Import Tester to test for comma seperated values.</li>
+                                    <li>Update to CSV Splitter, critical error caused only the last generated csv file to be exported. That issue has been resolved.</li>
+                                </ul>
+                            </ng-template>
+                        </mat-expansion-panel>
+
+
+                    </mat-accordion>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

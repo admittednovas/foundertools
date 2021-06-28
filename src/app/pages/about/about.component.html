@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="container-content">
+        <div id="page-wrapper">
+            <mat-card>
+                <mat-card-content>
+                    <div id="content-wrapper">
+                        <div id="about">
+                            <h1>Hello.</h1>
+                            <p>First and foremost, thank you for using FounderTools. This site is a bit of a labor of love for me. Who am I? I'm David Matteson. I built this whole thing.</p>
+                            <p>Originally, I built the Import Tester because having to look through all the rows and columns of my CSV was too time consuming. I put it up online because I thought people might find it helpful.</p>
+                            <p>I started to see other areas where I might be able to build something to make things easier when managing my Volusion store. So I built those too. </p>
+                            <p>I hope to continue to build new tools and host them here. This is a way for me to grow as a developer and to test new ideas while, hopefully, offering somethign that others find useful.</p>
+                        </div>
+                        <div id="contact">
+                            <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="John Smith" formControlName="name">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="jsmith@example.com" formControlName="emailaddress">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Message</mat-label>
+                                    <textarea matInput placeholder="Ex. A new tool request..." formControlName="message"></textarea>
+                                </mat-form-field>
+                                <div class="captcha-wrapper">
+                                    <re-captcha formControlName="recaptcha" siteKey="6LdgnQQbAAAAAAGh6r-pBpJXJJSw8sinH4IEVKII"></re-captcha>
+                                </div>
+                                <button mat-raised-button color="accent" class="fullwidth" [disabled]="!contactForm.valid">
+                                    <fa-icon [icon]="faPaperPlane"></fa-icon>
+                                    <span>Send</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

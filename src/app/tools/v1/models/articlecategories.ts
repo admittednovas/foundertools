@@ -1,0 +1,1 @@
+export const ArticleCategories = {"id":{"type":"integer","required":true},"categoryname":{"type":"text","maxLength":255},"categoryorder":{"type":"integer"},"categorytype":{"type":"text","maxLength":255},"lastmodified":{"type":"date-time"},"lastmodby":{"type":"integer"}}

@@ -1,0 +1,1 @@
+export const GiftCards = {"giftcardid":{"type":"text","maxLength":13,"required":true},"giftamount":{"type":"number"},"giftamountleft":{"type":"number"},"datecreated":{"type":"date-time"},"lastmodified":{"type":"date-time"},"byorderid":{"type":"integer"},"customerid":{"type":"integer"},"lastmodby":{"type":"integer"},"active":{"type":"enum","enumvals":["Y","N"]}}

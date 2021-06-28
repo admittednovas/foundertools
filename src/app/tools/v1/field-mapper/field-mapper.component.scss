@@ -1,0 +1,26 @@
+@use '../../../../toolstyle.scss';
+.map-row {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    .mat-form-field {
+        flex: 1 1 auto;
+    }
+    .map-icon {
+        padding:0 1rem;
+        margin-top:-0.6666666667em;
+    }
+    .delete-wrapper {
+        padding-left:2rem;
+        margin-top:-0.6666666667em;
+    }
+}
+
+.error-wrapper {
+    margin-bottom:2rem;
+    padding:1rem;
+    background:#D32F2F;
+    color:#FFF;
+    font-size:1.1rem;
+    border-radius:4px
+}

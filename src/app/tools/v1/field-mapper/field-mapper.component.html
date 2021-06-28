@@ -1,0 +1,107 @@
+<mat-drawer-container class="tool-container" [hasBackdrop]="isOpen">
+  <mat-drawer mode="side" [opened]='!isOpen' class="mat-elevation-z1">
+    <h1>Field Mapper</h1>
+    <form [formGroup]="headerForm" (ngSubmit)="startTool()" class="tool-controls">
+
+        <mat-form-field appearance="fill" color="primary">
+            <mat-label>Destination Table</mat-label>
+            <mat-select formControlName="destinationTable">
+                <mat-option *ngFor="let table of allTables" [value]="table">{{table}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="file-upload">
+            <input type="file" accept=".csv" formControlName="csvfile" name="csvfile" id="fileinput" #csv (change)="fileUpload(csv.files)">
+            <button type="button" mat-raised-button color="primary" (click)="csv.click()" class="is-fullwidth">
+                <fa-icon [icon]="faFileUpload" size="lg"></fa-icon>
+                <span>Upload CSV File</span>
+            </button>
+        </div>
+        <div class="start-tool">
+            <button mat-raised-button color="accent" (click)="startTool()" class="is-fullwidth" [disabled]="!headerForm.valid">
+                <fa-icon [icon]="faPlay" size="lg"></fa-icon>
+                <span>Start Mapping</span>
+            </button>
+        </div>
+
+    </form>
+  </mat-drawer>
+  <mat-drawer-content>
+  
+  
+    <button mat-fab color="primary" class="sidebar-toggle" (click)="openSidebar()">
+        <fa-icon [icon]=" (isOpen? faSlidersH : faTimes) " size="lg"></fa-icon>
+    </button>
+	
+  <mat-card>
+        <mat-card-content>
+		
+		
+            <div class="instruction" *ngIf="!ready; else toolResults">
+                <p>Your Volusion store may require adding data provided by a third party service or supplier and that data may not match the fields in you store. This utility allows for easily mapping your thrid party CSV columns to Volusion fields.</p>
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>Select the table you intend to upload your file to in your store.</li>
+                    <li>Upload your CSV import file using the <i>Upload CSV</i> button above.</li>
+                    <li>Click the <i>Start Mapping</i> button to start the tool.</li>
+                    <li>You can then visually map your fields to Volusion fields.</li>
+                </ol>
+                <p>Once all fields are either mapped or discarded, you an then export an updated CSV file for importing to your store.</p>
+            </div>
+			<ng-template #toolResults>
+			    <div class="progress-wrapper" *ngIf="!complete">
+                    <mat-spinner></mat-spinner>
+                </div>
+				<div class="results" *ngIf="complete">
+
+                    <ng-container *ngIf="errors.length > 0">
+                        <div class="error-wrapper">
+                            <span><strong>Found Duplicate Values: </strong> <i>{{errors}}</i></span>
+                        </div>
+                    </ng-container>
+
+                    <form [formGroup]="mapperForm" (ngSubmit)="mapFields()" class="tool-controls">
+                        
+                        <ng-container formArrayName="maprow" *ngFor="let m of mapperForm.get('maprow')['controls']; index as i">
+                            <div class="map-row" [formGroupName]="i">
+
+                                <mat-form-field appearance="fill">
+                                    <input matInput formControlName="thirdparty" readonly>
+                                </mat-form-field>
+
+                                <span class="map-icon">
+                                    <fa-icon [icon]="faAngleDoubleRight" size="2x"></fa-icon>
+                                </span>
+
+                                <mat-form-field appearance="fill" color="primary">
+                                    <mat-select formControlName="volusion">
+                                        <mat-option value="">Select One</mat-option>
+                                        <mat-option *ngFor="let t of tableFields" [value]="t">{{t}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <span class="delete-wrapper">
+                                    <button mat-mini-fab color="warn">
+                                        <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+                                    </button>
+                                </span>
+
+                            </div>
+                        </ng-container>
+                        <button mat-raised-button color="accent" class="fullwidth" id="submit-button" [disabled]="!mapperForm.valid">
+                            <fa-icon [icon]="(generatingDL ? faSpinner : faCog)" [class.fa-spin]="generatingDL"></fa-icon>
+                            <span>Map Fields</span>
+                        </button>
+                    </form>
+
+                </div>
+			</ng-template>
+			
+			
+        </mat-card-content>
+    </mat-card>
+
+    <div class="ad-wrapper"></div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

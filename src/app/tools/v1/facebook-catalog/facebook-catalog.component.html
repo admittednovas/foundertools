@@ -1,0 +1,54 @@
+<mat-drawer-container class="tool-container" [hasBackdrop]="isOpen">
+    <mat-drawer mode="side" [opened]='!isOpen' class="mat-elevation-z1">
+        <h1>Facebook Catalog Generator</h1>
+        <form [formGroup]="headerForm" (ngSubmit)="startTool()" class="tool-controls">
+            
+            <div class="file-upload">
+                <input type="file" accept=".csv" formControlName="csvfile" name="csvfile" id="fileinput" #csv (change)="fileUpload(csv.files)">
+                <button type="button" mat-raised-button color="primary" (click)="csv.click()" class="is-fullwidth">
+                    <fa-icon [icon]="faFileUpload" size="lg"></fa-icon>
+                    <span>Upload CSV File</span>
+                </button>
+            </div>
+            <div class="start-tool">
+                <button mat-raised-button color="accent" (click)="startTool()" class="is-fullwidth" [disabled]="!headerForm.valid">
+                    <fa-icon [icon]="faPlay" size="lg"></fa-icon>
+                    <span>Build Feed</span>
+                </button>
+            </div>
+
+        </form>
+    </mat-drawer>
+
+    <mat-drawer-content>
+        <button mat-fab color="primary" class="sidebar-toggle" (click)="openSidebar()">
+            <fa-icon [icon]=" (isOpen? faSlidersH : faTimes) " size="lg"></fa-icon>
+        </button>
+        <mat-card>
+            <mat-card-content>
+                <div class="instruction" *ngIf="!ready; else toolResults">
+                    <p>This tool is intended to assist with generating a Facebook Product Feed file from your stores product export. </p>
+                    <p>The tool relies on completed product information found in the Advanced Info > Vendors and Advanced Info > 3rd Party Integrations sections of your product edit page. For more details on the Facebook Feed required data, please reviews the documentation <a href="https://www.facebook.com/business/help/120325381656392?id=725943027795860" target="_blank" rel="external">HERE</a></p>
+                    <p><strong>Instructions:</strong></p>
+                    <ol>
+                        <li>Upload your CSV import file using the <i>Upload CSV</i> button above.</li>
+                        <li>Click the <i>Build Feed</i> button to start the tool.</li>
+                    </ol>
+                    <p>The tool will then read your product data and generate a CSV feed file for uploading to Facebook.</p>
+                </div>
+                <ng-template #toolResults>
+                    <div class="progress-wrapper" *ngIf="!complete">
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <div class="results" *ngIf="complete">
+                        <p>Facebook Product Catalog feed file created including <strong>{{outputData.length}}</strong> total products. Click below to download your feed file.</p>
+                        <button mat-raised-button color="accent" class="fullwidth" (click)="downloadFile()">
+                            <fa-icon [icon]="(generatingDL ? faSpinner : faFileDownload)" [class.fa-spin]="generatingDL"></fa-icon>
+                            <span>Download Facebook Catalog</span>
+                        </button>
+                    </div>
+                </ng-template>
+            </mat-card-content>
+        </mat-card>
+    </mat-drawer-content>
+</mat-drawer-container>

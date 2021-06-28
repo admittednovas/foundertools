@@ -1,0 +1,24 @@
+@use '../../../../toolstyle.scss';
+
+.error-table {
+    width:100%;
+    .mat-header-cell {
+        background-color:#0288D1;
+        color:#FFF;
+    }
+}
+.error-wrapper {
+    margin-bottom:1rem;
+}
+.show-char {
+    margin-left:0.75rem;
+    font-size:1rem;
+}
+.copy-errors {
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:1rem;
+    .ng-fa-icon {
+        margin-right:1rem;
+    }
+}

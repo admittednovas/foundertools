@@ -1,0 +1,1 @@
+export const States_Provinces = {"country_id":{"type":"integer"},"state_name":{"type":"text","maxLength":50},"state_code":{"type":"text","maxLength":50},"state_islocalregion":{"type":"enum","enumvals":["Y","N"]},"lastmodified":{"type":"date-time"},"lastmodby":{"type":"integer"}}

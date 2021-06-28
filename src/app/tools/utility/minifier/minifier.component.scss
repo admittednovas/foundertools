@@ -1,0 +1,35 @@
+.minify-counter {
+    margin-top:2rem;
+    .full-width {
+        width:100%;
+        textarea {
+            min-height:125px;
+        }
+    }
+}
+
+button.full-width {
+    .ng-fa-icon {
+        margin-right:0.5rem;
+    }
+}
+
+.results {
+    margin-top:2rem;
+    code {
+        border-radius:2px;
+        background:#f8f8f8;
+        height:100%;
+        border:1px solid #eeee;
+        padding:1rem;
+        display: block;
+        white-space: pre;
+        color:#424242;
+        line-height:1.2rem;
+        font-family: monospace;
+        overflow-x:scroll;
+    }
+    .copy {
+        margin-top:2rem;
+    }
+}
